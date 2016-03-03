@@ -10,8 +10,8 @@
 ## Script will return "FOUND" and exit 0 - otherwise, the script will exit 1
 
 ## Example Usage:
-# ./ShadowPuzzle.sh checkthisout.txt
-# ./ShadowPuzzle.sh "the first time" "I SAW YOU THERE" "In my dreams"
+# ./ShadowPuzzleFive.sh checkthisout.txt
+# ./ShadowPuzzleFive.sh "the first time" "I SAW YOU THERE" "In my dreams"
 
 ###################################################################################################
 
@@ -46,7 +46,7 @@ function doesStringWork() {
   # Time the curling of the page
   START=$(date +%s)
   # Curl the s3 page
-  PAGE=$(curl -s https://s3.amazonaws.com/shadowpuzzle/"$STRING".xml --connect-timeout 60 2>&1)
+  PAGE=$(curl -s https://s3.amazonaws.com/shadowpuzzlefive/"$STRING".xml --connect-timeout 60 2>&1)
   # Grep the page to see if there's a match
   if [[ ! "$PAGE" =~ "Access Denied" ]] && [ -n "$PAGE" ]; then
     # Found it!
@@ -56,7 +56,7 @@ function doesStringWork() {
     DIFF=$(echo "$END - $START" | bc)
 
     # Return FOUND
-    echo "FOUND: $STRING with URL: https://s3.amazonaws.com/shadowpuzzle/$STRING.xml (Amount of Time: $DIFF Seconds)"
+    echo "FOUND: $STRING with URL: https://s3.amazonaws.com/shadowpuzzlefive/$STRING.xml (Amount of Time: $DIFF Seconds)"
 
     # Show the puzzle type...
     if [ $SHOWPUZZLETYPE = 1 ]; then
@@ -82,7 +82,7 @@ function doesStringWork() {
     DIFF=$(echo "$END - $START" | bc)
 
     # Return not found
-    echo "Did not find: $STRING with URL: https://s3.amazonaws.com/shadowpuzzle/$STRING.xml (Amount of Time: $DIFF Seconds)"
+    echo "Did not find: $STRING with URL: https://s3.amazonaws.com/shadowpuzzlefive/$STRING.xml (Amount of Time: $DIFF Seconds)"
   fi
 
   # Empty line
